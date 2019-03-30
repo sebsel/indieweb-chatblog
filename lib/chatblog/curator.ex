@@ -9,8 +9,8 @@ defmodule Chatblog.Curator do
     GenServer.start_link(__MODULE__, args, opts ++ [name: name])
   end
 
-  def notify(channel, type, html) do
-    GenServer.cast(name(channel), {type, html})
+  def notify(channel, type, message) do
+    GenServer.cast(name(channel), {type, message})
   end
 
   defp name(channel), do: {:via, Registry, {Chatblog.Curators, channel}}
@@ -18,22 +18,36 @@ defmodule Chatblog.Curator do
   # GenServer callbacks
 
   def init(args) do
-    channel = Keyword.get(args, :channel)
-    {:ok, %{channel: channel, last_message_at: nil, entry: nil}}
+    {:ok,
+     %{
+       channel: Keyword.get(args, :channel),
+       last_message_at: nil,
+       entry: nil,
+       messages: []
+     }}
   end
 
-  def handle_cast({:message, html}, %{channel: channel, entry: entry} = state) do
+  def handle_cast({:message, message}, %{messages: messages, entry: entry} = state) do
+    new_entry? = should_be_new_entry?(message, state)
+
     entry =
-      if should_be_new_entry?(html, state) do
-        Repo.insert!(%Entry{body: html, channel: channel})
+      if new_entry? do
+        Repo.insert!(%Entry{body: message.html, channel: state.channel})
       else
         entry
-        |> Changeset.change(%{body: entry.body <> html})
+        |> Changeset.change(%{body: entry.body <> message.html})
         |> Repo.update!()
       end
 
-    state = %{state | entry: entry, last_message_at: DateTime.utc_now()}
-    {:noreply, state}
+    messages =
+      if new_entry?, do: [message], else: [message] ++ messages
+
+    {:noreply,
+      state
+      |> Map.put(:entry, entry)
+      |> Map.put(:messages, messages)
+      |> Map.put(:last_message_at, DateTime.utc_now())
+    }
   end
 
   def handle_cast(_, state), do: {:noreply, state}

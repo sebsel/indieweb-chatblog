@@ -17,16 +17,13 @@ defmodule Chatblog.Message do
       %Message{html: html}
       |> find(:id, ~r|id="(.*?)"|)
       |> find(:text, ~r|<span class="e-content p-name">(.*?)$|)
-      |> strip_text_tags()
+      |> Map.update!(:text, &strip_text_tags/1)
       |> find(:url, ~r|<a href="(.*?)" class="hash"|)
       |> find(:author, ~r|class="author p-nickname p-name u-url".*?>(.*?)</a>|)
       |> find(:author_photo, ~r|class="avatar"><img src="(.*?)"|)
       |> find(:author_url, ~r|p-author.*?<a href="(.*?)" class="author p-nickname p-name u-url"|)
       |> find(:published, ~r|class="dt-published" datetime="(.*?)"|)
-      |> Map.update!(:published, fn string ->
-        {:ok, published, _} = DateTime.from_iso8601(string)
-        published
-      end)
+      |> Map.update!(:published, &parse_published_time/1)
 
     %{message | type: determine_type(message)}
   end
@@ -45,6 +42,9 @@ defmodule Chatblog.Message do
     loqi? = author == "Loqi"
 
     cond do
+      html == nil ->
+        nil
+
       Regex.match?(~r|class=".*? msg-wiki .*?"|, html) ->
         :wiki_edit
 
@@ -66,7 +66,14 @@ defmodule Chatblog.Message do
   end
 
   # the things I do for love
-  defp strip_text_tags(%Message{text: text} = message) do
-    %Message{message | text: String.replace(text, ~r|<.*?>|, "")}
+  defp strip_text_tags(nil), do: nil
+  defp strip_text_tags(text) do
+    String.replace(text, ~r|<.*?>|, "")
+  end
+
+  defp parse_published_time(nil), do: nil
+  defp parse_published_time(string) do
+    {:ok, published, _} = DateTime.from_iso8601(string)
+    published
   end
 end

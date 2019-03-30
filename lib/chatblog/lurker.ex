@@ -1,6 +1,6 @@
 defmodule Chatblog.Lurker do
   use GenServer
-  alias Chatblog.Curator
+  alias Chatblog.{Curator, Message}
 
   @stream_endpoint "https://chat.indieweb.org/__/sub?id=chat"
 
@@ -28,7 +28,7 @@ defmodule Chatblog.Lurker do
         _ -> :unknown
       end
 
-    Curator.notify(channel, type, html)
+    Curator.notify(channel, type, Message.from_html(html))
     {:noreply, state}
   end
 end
