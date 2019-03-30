@@ -1,3 +1,251 @@
 /* This file is for your main application css. */
 
 @import "./phoenix.css";
+
+h2 {
+    margin-bottom: 0;
+}
+
+/* Styles from https://github.com/indieweb/chat.indieweb.org/blob/master/public/assets/styles.css */
+
+main {
+    padding-left: 300px;
+  }
+  
+  @media (max-width : 992px) {
+    main {
+      padding-left: 0;
+    }
+    main h2 .channel-name {
+      display: none;
+    }
+    :target:before {
+      content: "";
+      display: block;
+      height: 72px;
+      margin-top: -72px;
+    }
+  }
+  @media (min-width : 992px) {
+    nav {
+      display: none;
+    }
+  }
+  
+  li.channel.activity {
+    background-color: rgba(255,177,0,0.25);
+  }
+  
+  li.channel.current {
+    background-color: rgb(240,240,240);
+  }
+  
+  .side-nav form {
+    padding: 10px;
+  }
+  
+  h2 {
+    font-size: 2.5rem;
+  }
+  
+  
+    a.time {
+      color: #999;
+      font-weight: normal;
+    }
+    a.hash {
+      color: #BBB;
+      font-weight: normal;
+      text-decoration: none;
+    }
+    a.hash-join, a.hash-leave {
+      opacity: 0;
+    }
+    .line {
+      min-height: 22px;
+      margin-bottom: 4px;
+    }
+    .line .text span {
+      word-wrap: break-word;
+    }
+    .join.cluster {
+      color: #bbb;
+      padding-left: 48px;
+    }
+    .deleted.cluster {
+      color: #bbb;
+      padding-left: 48px;
+    }
+    .msg-join, .msg-join .text a, .msg-leave, .msg-leave a {
+      color: #bbb;
+    }
+    .msg-wiki, .msg-wiki .text a, .msg-wiki a.author {
+      color: #7e3db4;
+    }
+    .msg-wiki .text a {
+      font-weight: bold;
+    }
+    .msg-message.emote .text {
+      font-style: italic;
+    }
+    .msg-twitter.retweet {
+      opacity: 0.5;
+    }
+    .msg-twitter, .msg-twitter a {
+      color: #2087e1;
+    }
+    a {
+      color: #222299;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+    .nick, a.author {
+      color: #a13d3d;
+    }
+    .msg-twitter a.author {
+      color: #2087e1;
+    }
+    .author {
+      font-weight: bold;
+    }
+    .avatar {
+      margin-right: 3px;
+      margin-top: 1px;
+      margin-bottom: 1px;
+      display: inline-block;
+    }
+    .avatar img {
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+      vertical-align: middle;
+    }
+    
+    .clear {
+      clear: both;
+    }
+    
+    h2.date {
+      padding: 0 10px;
+      margin: 0;
+      margin-top: 6px;
+    }
+    
+    .logs {
+      padding: 4px 10px 30px 10px;
+    }
+    .logs.active-chat {
+      padding-bottom: 120px;
+    }
+    
+    .hilite .in {
+      background-color: #fffdd0;
+    }
+    
+    .skip {
+      margin-bottom: 12px;
+    }
+    #bottom {
+      margin-top: 12px;
+    }
+    
+    @media (max-width: 640px) {
+      body {
+        width: 100%;
+        font-size: 12px;
+      }
+      .avatar img {
+        width: 16px;
+        height: 16px;
+      }
+    }
+    
+    .line:hover {
+        background-color: #fffdeb;
+    }
+    
+    .featured {
+      font-size: 130%;
+      margin: 20px 0;
+    }
+    
+    .spam {
+      color:lightgrey; 
+      font-size: x-small;
+      max-width:100%; 
+      overflow:hidden; 
+      text-overflow:ellipsis;
+      margin-bottom: 1px;
+      white-space: nowrap;
+      min-height: 10px;
+      opacity: 0.5;
+    }
+    .spam .avatar img {
+      height: 10px;
+    }
+  
+  .daymark {
+    font-size: 1.2em;
+    border-top: 2px #ccc solid;
+  }
+  .daymark .tz {
+    color: #888;
+  }
+  
+  #indieweb-header .channels .channel.current {
+    background: #e5e5e5;
+    box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125)
+  }
+  #indieweb-header .channels .channel.activity {
+    background: #ffee88;
+    box-shadow: inset 0 3px 8px rgba(200, 180, 30, 0.325)
+  }
+  
+  
+  #indieweb-header ul.right {
+    float: right;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    margin-right: 10px;
+  }
+  #indieweb-header ul.right li {
+    display: inline-block;
+    margin: 0;
+    padding: 4px 10px;
+  }
+  #indieweb-header .disabled,
+  .side-nav.fixed a.disabled {
+    color: #ccc;
+  }
+  
+  .side-nav .search button.material-icons {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 2px;
+      border: none;
+      background-color: transparent;
+  }
+  
+  .side-nav .search button.material-icons:focus, .side-nav .search button.material-icons:hover {
+      background-color: rgba(255,177,0,0.25);
+  }
+  
+  
+  #chat-footer { 
+    border-top: 1px #ddd solid;
+    
+    background: #fafafa; /* Old browsers */
+    background: -moz-linear-gradient(top, #ffffff, #f2f2f2); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #ffffff, #f2f2f2); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #e9e9e9, #f2f2f2); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  
