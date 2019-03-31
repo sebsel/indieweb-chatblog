@@ -2,13 +2,8 @@
   <%= for {channel, entries} <- @channels do %>
       <h2 style="grid-column: <%= channel %>"><%= channel %></h2>
       <%= for entry <- entries do %>
-        <div style="
-          grid-row-start: <%= calculate_grid(entry.start_at) %>;
-          grid-row-end: <%= calculate_grid(entry.end_at) %>;
-          grid-column: <%= channel %>;
-        " class="entry">
-          <%= entry.body %>
-        </div>
+        <%= render("_entry.html", entry: entry) %>
       <% end %>
   <% end %>
+  <div id="more-entries"></div>
 </main>

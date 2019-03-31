@@ -14,4 +14,19 @@ import "phoenix_html"
 // Import local files
 //
 // Local files can be imported directly using relative paths, for example:
-// import socket from "./socket"
+import socket from "./socket"
+
+let postMarker = document.getElementById('more-entries')
+
+if (postMarker) {
+  socket.onMessage(({ payload }) => {
+    if (payload == undefined || payload.html == undefined || payload.id == undefined) return
+
+    let entry = document.getElementById('entry-' + payload.id)
+    if (entry) {
+      entry.outerHTML = payload.html
+    } else {
+      postMarker.insertAdjacentHTML('beforebegin', payload.html)
+    }
+  })
+}

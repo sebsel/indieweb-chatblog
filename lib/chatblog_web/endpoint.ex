@@ -1,7 +1,7 @@
 defmodule ChatblogWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :chatblog
 
-  socket "/socket", ChatblogWeb.UserSocket,
+  socket "/socket", ChatblogWeb.EntrySocket,
     websocket: true,
     longpoll: false
 

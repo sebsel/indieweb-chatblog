@@ -1,8 +1,8 @@
-defmodule ChatblogWeb.UserSocket do
+defmodule ChatblogWeb.EntrySocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", ChatblogWeb.RoomChannel
+  channel "chat:*", ChatblogWeb.UpdatesChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After

@@ -1,0 +1,7 @@
+<div class="entry" id="entry-<%= @entry.id %>" style="
+  grid-row-start: <%= calculate_grid(@entry.start_at) %>;
+  grid-row-end: <%= calculate_grid(@entry.end_at) %>;
+  grid-column: <%= @entry.channel %>;
+">
+  <%= @entry.body %>
+</div>

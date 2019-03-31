@@ -17,4 +17,14 @@ defmodule Chatblog.Entry do
     |> cast(attrs, [:body, :channel])
     |> validate_required([:body, :channel])
   end
+
+  def notify_updated(entry) do
+    ChatblogWeb.Endpoint.broadcast("chat:updates", "message", %{
+      id: entry.id,
+      html:
+        ChatblogWeb.PageView
+        |> Phoenix.View.render("_entry.html", entry: Map.update!(entry, :body, &{:safe, &1}))
+        |> Phoenix.HTML.safe_to_string()
+    })
+  end
 end

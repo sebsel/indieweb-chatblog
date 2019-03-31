@@ -47,6 +47,8 @@ defmodule Chatblog.Curator do
     messages =
       if new_entry?, do: [message], else: [message] ++ messages
 
+    Entry.notify_updated(entry)
+
     {:noreply,
       state
       |> Map.put(:entry, entry)
