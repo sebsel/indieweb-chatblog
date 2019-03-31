@@ -1,6 +1,17 @@
 # Chatblog
 
-To start your Phoenix server:
+The idea was to create a blog that would bundle chat messages from the 
+[IndieWeb chat log](https://chat.indieweb.org) and present them as
+blog posts. The `Lurker` reads the Javascript EventSource of the chat log
+page, and feeds them to the appropriate `Curator` (one per channel).
+These are responsible for holding the state of the conversation and
+deciding whether to break or not.
+
+When visiting the server from a browser, you will see a list of "blogposts".
+
+## Development
+
+To start the Phoenix server:
 
   * Install dependencies with `mix deps.get`
   * Create and migrate your database with `mix ecto.setup`
@@ -9,12 +20,3 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: http://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
