@@ -5,6 +5,8 @@ defmodule Chatblog.Entry do
   schema "entries" do
     field :body, :string
     field :channel, :string
+    field :start_at, :utc_datetime
+    field :end_at, :utc_datetime
 
     timestamps()
   end

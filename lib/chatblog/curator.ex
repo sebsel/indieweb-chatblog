@@ -32,10 +32,15 @@ defmodule Chatblog.Curator do
 
     entry =
       if new_entry? do
-        Repo.insert!(%Entry{body: message.html, channel: state.channel})
+        Repo.insert!(%Entry{
+          body: message.html,
+          channel: state.channel,
+          start_at: message.published,
+          end_at: message.published
+        })
       else
         entry
-        |> Changeset.change(%{body: entry.body <> message.html})
+        |> Changeset.change(%{body: entry.body <> message.html, end_at: message.published})
         |> Repo.update!()
       end
 

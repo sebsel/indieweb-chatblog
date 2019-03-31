@@ -6,31 +6,19 @@ h2 {
     margin-bottom: 0;
 }
 
-/* Styles from https://github.com/indieweb/chat.indieweb.org/blob/master/public/assets/styles.css */
+main.grid {
+  display: grid;
+  grid-template-rows: repeat(720, auto);
+  grid-template-columns: repeat(4, 25%);
+  grid-template-areas: 
+     "indieweb indieweb-dev indieweb-meta indieweb-wordpress"
+}
 
-main {
-    padding-left: 300px;
-  }
-  
-  @media (max-width : 992px) {
-    main {
-      padding-left: 0;
-    }
-    main h2 .channel-name {
-      display: none;
-    }
-    :target:before {
-      content: "";
-      display: block;
-      height: 72px;
-      margin-top: -72px;
-    }
-  }
-  @media (min-width : 992px) {
-    nav {
-      display: none;
-    }
-  }
+.entry {
+  margin-bottom: 1em;
+}
+
+/* Styles from https://github.com/indieweb/chat.indieweb.org/blob/master/public/assets/styles.css */
   
   li.channel.activity {
     background-color: rgba(255,177,0,0.25);

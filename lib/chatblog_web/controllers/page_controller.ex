@@ -3,10 +3,10 @@ defmodule ChatblogWeb.PageController do
   alias Chatblog.Repo
 
   def index(conn, _params) do
-    entries =
+    channels =
       Repo.all(Chatblog.Entry)
-      |> Enum.map(&{&1.channel, {:safe, &1.body}})
+      |> Enum.group_by(& &1.channel, & %{&1 | body: {:safe, &1.body}})
 
-    render(conn, "index.html", entries: entries)
+    render(conn, "index.html", channels: channels)
   end
 end

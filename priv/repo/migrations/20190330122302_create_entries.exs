@@ -5,6 +5,8 @@ defmodule Chatblog.Repo.Migrations.CreateEntries do
     create table(:entries) do
       add :body, :text
       add :channel, :string
+      add :start_at, :datetime
+      add :end_at, :datetime
 
       timestamps()
     end
